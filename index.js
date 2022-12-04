@@ -1,6 +1,6 @@
 const express = require("express")
 const app = express();
-const port = 5000;
+const port = process.env.PORT || 5000;
 const path = require('path');
 const mongoose = require("mongoose")
 const bodypaser = require("body-parser")
@@ -21,7 +21,7 @@ app.use(bodypaser.urlencoded({
      extended: true
 }))
 app.use(express.json())
-app.listen("5000", () => {
+app.listen(port, () => {
      console.log("server is strated ...")
 })
 
