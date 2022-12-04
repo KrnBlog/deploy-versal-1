@@ -1,6 +1,51 @@
 const express = require("express")
-const app = express() ;
-const port = 5000 ;
+const app = express();
+const port = 5000;
+const path = require('path');
+const mongoose = require("mongoose")
+const bodypaser = require("body-parser")
 
-app.listen(port , ()=>{console.log("starting server ...")})
-app.get("/",(req,res)=>{res.send("hello from root dire   ctory")})
+
+//mongoose connection
+mongoose.connect('mongodb+srv://karan:karanarora@cluster0.ujsaxn6.mongodb.net/?retryWrites=true&w=majority', {
+          useNewUrlParser: true,
+          useUnifiedTopology: true
+     },(errorInConnection)=>{
+          if(errorInConnection){console.log("error in database")}
+          else{console.log("connected in database")}
+     })
+const Notes = require("./modelYt.js")
+
+
+app.use(bodypaser.urlencoded({
+     extended: true
+}))
+app.use(express.json())
+app.listen("5000", () => {
+     console.log("server is strated ...")
+})
+
+app.get("/", (req, res) => {
+     res.sendFile(path.join(__dirname, '/index.html'))
+})
+// app.get 
+app.get("/form", (req, res) => {
+     // console.log("someone tried to access rootpage")
+     res.sendFile(__dirname + "/form.html")
+     console.log("we have send file of form")
+     // res.status(200).json("hello buddy")
+})
+// app.post
+app.post("/form",function (req,res){
+     console.log("try to get post")
+     let newNote = new Notes({
+          title: req.body.title,
+          content : req.body.content
+     })
+     newNote.save();
+     console.log("tru to save")
+     res.redirect("/form");
+     console.log("first")
+     // console.log(newNote);  
+     // res.end(JSON.stringify(newNote));
+}) 

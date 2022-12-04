@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>HTML Form</title>
+</head>
+<body>
+     <p>i am trying to send data to mongo db database</p>
+     <form action="/form" class="container" method="post">
+          <div>
+               <span>Name :- </span>
+               <input class="form-control" type="text" name="title" id="">
+          </div>
+          <div>
+               <span>Description</span>
+               <textarea class="form-control" name="content" id="" cols="30" rows="10"></textarea>
+          </div>
+          <button type="submit">Add to mongo db</button>
+          <div><input type="submit" value="Submit"> </div>
+          <button type="reset">reset</button>
+     </form>
+</body>
+</html>
