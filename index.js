@@ -7,11 +7,11 @@ const bodypaser = require("body-parser")
 
 
 //mongoose connection
-mongoose.connect('mongodb+srv://karan:karanarora@cluster0.ujsaxn6.mongodb.net/?retryWrites=true&w=majority', {
+mongoose.connect('mongodb+srv://karan:karanarora@cluster0.ujsaxn6.mongodb.net/?retryWrites=true&w=majorit', {
           useNewUrlParser: true,
           useUnifiedTopology: true
-     },(errorInConnection)=>{
-          if(errorInConnection){console.log("error in database")}
+     },(err)=>{
+          if(err){console.log(err)}
           else{console.log("connected in database")}
      })
 const Notes = require("./modelYt.js")
@@ -37,15 +37,19 @@ app.get("/form", (req, res) => {
 })
 // app.post
 app.post("/form",function (req,res){
-     console.log("try to get post")
-     let newNote = new Notes({
-          title: req.body.title,
-          content : req.body.content
-     })
-     newNote.save();
-     console.log("tru to save")
-     res.redirect("/form");
-     console.log("first")
+     let a = req.body.one;
+     console.log(a)
+     console.log("sending to thankyou")
+     res.sendFile(__dirname + "/thankyou.html")
+     // console.log("try to get post")
+     // let newNote = new Notes({
+     //      title: req.body.title,
+     //      content : req.body.content
+     // })
+     // newNote.save();
+     // console.log("tru to save")
+     // res.redirect("/form");
+     // console.log("first")
      // console.log(newNote);  
      // res.end(JSON.stringify(newNote));
 }) 
